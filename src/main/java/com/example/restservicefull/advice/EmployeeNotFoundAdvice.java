@@ -1,4 +1,4 @@
-package com.example.advice;
+package com.example.restservicefull.advice;
 
 import com.example.restservicefull.exceptions.EmployeeNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ public class EmployeeNotFoundAdvice {
 
   @ResponseBody
   @ExceptionHandler(EmployeeNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   String employeeNotFoundHandler(EmployeeNotFoundException exception) {
     return exception.getMessage();
   }
