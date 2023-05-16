@@ -12,7 +12,7 @@ public class EmployeeNotFoundAdvice {
 
   @ResponseBody
   @ExceptionHandler(EmployeeNotFoundException.class)
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
   String employeeNotFoundHandler(EmployeeNotFoundException exception) {
     return exception.getMessage();
   }
