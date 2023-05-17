@@ -6,7 +6,6 @@ import com.example.restservicefull.models.Employee;
 import com.example.restservicefull.repositories.EmployeeRespository;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.catalina.connector.Response;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
