@@ -17,10 +17,12 @@ public class LoadDatabase {
   CommandLineRunner initDatabase(EmployeeRespository repository) {
     return args -> {
       log.info(
-        "Preloading " + repository.save(new Employee("Bilbo Baggins", "thief"))
+        "Preloading " +
+        repository.save(new Employee("Bilbo", "Baggins", "thief"))
       );
       log.info(
-        "Preloading " + repository.save(new Employee("Frodo Baggins", "thief"))
+        "Preloading " +
+        repository.save(new Employee("Frodo", "Baggins", "thief"))
       );
     };
   }
