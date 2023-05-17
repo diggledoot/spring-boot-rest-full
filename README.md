@@ -1,4 +1,4 @@
 # Bookmark~
 
-You stopped at Simplifying Link Creation
+You stopped at Evolving REST APIs
 https://spring.io/guides/tutorials/rest/
