@@ -1,5 +1,7 @@
 package com.example.restservicefull.quartz;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -20,14 +22,15 @@ public class QuartzJob implements Job {
     System.out.println("Job executed!");
 
     try {
-      Class<?> jobClass = Class.forName(
+      Class<? extends Job> jobClass = (Class<? extends Job>) Class.forName(
         "com.example.restservicefull.quartz.Job1"
       );
-      Job jobInstance = (Job) jobClass.newInstance();
+      Constructor<? extends Job> jobConstructor = jobClass.getDeclaredConstructor();
+      jobConstructor.newInstance();
 
       JobDetail jobDetail = JobBuilder
-        .newJob((Class<? extends Job>) jobClass)
-        .withIdentity("Job1")
+        .newJob(jobClass)
+        .withIdentity("Job1", "JobGroup")
         .build();
 
       Trigger trigger = TriggerBuilder
@@ -45,7 +48,11 @@ public class QuartzJob implements Job {
       ClassNotFoundException
       | InstantiationException
       | IllegalAccessException
-      | SchedulerException e
+      | SchedulerException
+      | IllegalArgumentException
+      | InvocationTargetException
+      | NoSuchMethodException
+      | SecurityException e
     ) {
       // TODO Auto-generated catch block
       e.printStackTrace();

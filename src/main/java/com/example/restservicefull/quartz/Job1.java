@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Job1 implements Job {
 
+  public Job1() {}
+
   @Override
   public void execute(JobExecutionContext context)
     throws JobExecutionException {
