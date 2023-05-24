@@ -35,7 +35,24 @@ public class QuartzConfig {
   }
 
   @Bean
-  public SchedulerFactoryBean createSchedulerFactory(
+  public JobDetailFactoryBean jobDetailFactory() {
+    JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
+    jobDetailFactory.setJobClass(QuartzJob.class);
+    return jobDetailFactory;
+  }
+
+  @Bean
+  public SimpleTriggerFactoryBean triggerFactory(JobDetail jobDetail) {
+    SimpleTriggerFactoryBean triggerFactory = new SimpleTriggerFactoryBean();
+    triggerFactory.setJobDetail(jobDetail);
+    triggerFactory.setStartDelay(0);
+    triggerFactory.setRepeatInterval(2000);
+
+    return triggerFactory;
+  }
+
+  @Bean
+  public SchedulerFactoryBean schedulerFactory(
     SpringBeanJobFactory springBeanJobFactory,
     Trigger trigger
   ) {
@@ -48,24 +65,5 @@ public class QuartzConfig {
     schedulerFactory.setJobFactory(springBeanJobFactory);
 
     return schedulerFactory;
-  }
-
-  @Bean
-  public JobDetailFactoryBean createJobDetailFactoryBean() {
-    JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
-    jobDetailFactory.setJobClass(QuartzJob.class);
-    return jobDetailFactory;
-  }
-
-  @Bean
-  public SimpleTriggerFactoryBean createSimpleTriggerFactoryBean(
-    JobDetail jobDetail
-  ) {
-    SimpleTriggerFactoryBean simpleTriggerFactory = new SimpleTriggerFactoryBean();
-    simpleTriggerFactory.setJobDetail(jobDetail);
-    simpleTriggerFactory.setStartDelay(0);
-    simpleTriggerFactory.setRepeatInterval(2000);
-
-    return simpleTriggerFactory;
   }
 }
