@@ -1,23 +1,20 @@
 package com.example.restservicefull.quartz;
 
-import static org.quartz.SimpleScheduleBuilder.*;
-
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SchedulerService {
 
-  private final Scheduler scheduler;
-
-  public SchedulerService(Scheduler scheduler) {
-    this.scheduler = scheduler;
-  }
+  @Autowired
+  private Scheduler scheduler;
 
   public Scheduler getScheduler() {
     return this.scheduler;
@@ -37,7 +34,13 @@ public class SchedulerService {
     Trigger trigger = TriggerBuilder
       .newTrigger()
       .withIdentity("triggerdummy", "triggergroup")
-      .withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever())
+      .startNow()
+      .withSchedule(
+        SimpleScheduleBuilder
+          .simpleSchedule()
+          .withIntervalInSeconds(5)
+          .repeatForever()
+      )
       .build();
 
     this.scheduler.scheduleJob(job, trigger);

@@ -10,12 +10,12 @@ public class Config {
 
   @Bean
   public SchedulerFactoryBean schedulerFactoryBean() {
-    SchedulerFactoryBean fac = new SchedulerFactoryBean();
-    return fac;
+    SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+    return schedulerFactoryBean;
   }
 
   @Bean
-  public Scheduler scheduler(SchedulerFactoryBean fac) {
-    return fac.getScheduler();
+  public Scheduler scheduler(SchedulerFactoryBean schedulerFactoryBean) {
+    return schedulerFactoryBean.getScheduler();
   }
 }
