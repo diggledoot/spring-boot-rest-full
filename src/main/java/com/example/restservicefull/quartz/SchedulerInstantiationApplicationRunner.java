@@ -23,7 +23,7 @@ public class SchedulerInstantiationApplicationRunner
   public void run(ApplicationArguments args) throws Exception {
     //Initialize Scheduler instance
     log.info("Running the application runner for scheduler instance");
-    Scheduler scheduler = service.getScheduler();
+    service.startAllJobs();
     //Logic to instantiate initial jobs
   }
 }
